@@ -9,7 +9,7 @@ public class Espion extends personnage_de_base {
 		}
 		
 		public Espion(int a, int b, int c, ArrayList<String> d) {
-			super(60,80,40,d);
+			super(a,b,c,d);
 		}
 		
 		public String toString() {
