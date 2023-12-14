@@ -9,7 +9,7 @@ public class Enqueteur extends personnage_de_base {
 		}
 		
 		public Enqueteur(int a, int b, int c, ArrayList<String> d) {
-			super(80,60,60,d);
+			super(a,b,c,d);
 		}
 		
 		public String toString() {

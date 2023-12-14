@@ -9,7 +9,7 @@ public class Journaliste extends personnage_de_base {
 		}
 		
 		public Journaliste(int a, int b, int c, ArrayList<String> d) {
-			super(40,40,80,d);
+			super(a,b,c,d);
 		}
 		
 		public String toString() {

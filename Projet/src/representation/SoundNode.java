@@ -1,6 +1,7 @@
 package representation;
-
+/*
 public class SoundNode implements Event {
+
 		@Override
 		public void display() {
 			
@@ -10,4 +11,4 @@ public class SoundNode implements Event {
 		public Event chooseNext() {
 			
 		}
-}
+}*/
