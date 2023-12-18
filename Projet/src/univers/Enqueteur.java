@@ -1,4 +1,3 @@
-
 package univers;
 
 import java.util.ArrayList;
@@ -9,21 +8,18 @@ public class Enqueteur extends personnage_de_base {
         super();
     }
 
-    public Enqueteur(String nom, int niveau, int intelligence, int physique, int contacts, ArrayList<String> outils,
+    public Enqueteur(ArrayList<String> outils,
                      int statsCombat, int statsNegociation, int statsFuite) {
-        super(nom, niveau, intelligence, physique, contacts, outils, statsCombat, statsNegociation, statsFuite);
+        super(outils, statsCombat, statsNegociation, statsFuite);
     }
 
-        @Override
+    @Override
     public String toString() {
-        return "Le personnage est un enqueteur.\n" + super.toString();
+        return "Le personnage est un enquêteur.\n" + super.toString();
     }
 
-      @Override
+    @Override
     public boolean equals(Object o) {
         return super.equals(o);
     }
-
-    
 }
-
