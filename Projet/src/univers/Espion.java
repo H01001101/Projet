@@ -1,7 +1,6 @@
 package univers;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Espion extends personnage_de_base {
 
@@ -9,9 +8,9 @@ public class Espion extends personnage_de_base {
         super();
     }
 
-    public Espion(String nom, int niveau, int a, int b, int c, ArrayList<String> d,
+    public Espion(ArrayList<String> outils,
                   int statsCombat, int statsNegociation, int statsFuite) {
-        super(nom, niveau, a, b, c, d, statsCombat, statsNegociation, statsFuite);
+        super(outils, statsCombat, statsNegociation, statsFuite);
     }
 
     @Override
