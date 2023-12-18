@@ -2,46 +2,45 @@ package univers;
 
 public class Lieu {
 
-		private String ville;
-		private String lieu;
-		
-		public Lieu() {
-			this.ville = null;
-			this.lieu = null;
-		}
-		
-		public Lieu(String v, String l) {
-			this.ville = v;
-			this.lieu = l;
-		}
+    private Villes ville;
+    private Lieux lieu;
 
-		public String getVille() {
-			return ville;
-		}
+    public Lieu() {
+        this.ville = null;
+        this.lieu = null;
+    }
 
-		public void setVille(String ville) {
-			this.ville = ville;
-		}
+    public Lieu(Villes v, Lieux l) {
+        this.ville = v;
+        this.lieu = l;
+    }
 
-		public String getLieu() {
-			return lieu;
-		}
+    public Villes getVille() {
+        return ville;
+    }
 
-		public void setLieu(String lieu) {
-			this.lieu = lieu;
-		}
-		
-		public String toString() {
-			return ("On est à "+this.ville+" dans "+this.lieu);
-		}
-		
-		public boolean equals(Object o) {
-			if(o instanceof Lieu) {
-				Lieu l = (Lieu) o;
-				if(l.ville==this.ville && l.lieu==this.lieu) {
-					return true;
-				}
-			}
-			return false;
-		}
+    public void setVille(Villes ville) {
+        this.ville = ville;
+    }
+
+    public Lieux getLieu() {
+        return lieu;
+    }
+
+    public void setLieu(Lieux lieu) {
+        this.lieu = lieu;
+    }
+
+    @Override
+    public String toString() {
+        return "On est à " + this.ville + " dans " + this.lieu;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Lieu)) return false;
+        Lieu l = (Lieu) o;
+        return l.ville == this.ville && l.lieu == this.lieu;
+    }
 }
