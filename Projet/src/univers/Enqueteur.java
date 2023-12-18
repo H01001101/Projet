@@ -14,6 +14,16 @@ public class Enqueteur extends personnage_de_base {
         super(nom, niveau, intelligence, physique, contacts, outils, statsCombat, statsNegociation, statsFuite);
     }
 
+        @Override
+    public String toString() {
+        return "Le personnage est un enqueteur.\n" + super.toString();
+    }
+
+      @Override
+    public boolean equals(Object o) {
+        return super.equals(o);
+    }
+
     
 }
 
