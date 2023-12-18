@@ -27,5 +27,6 @@ public class ChanceNode extends InnerNode {
 			Random rand = new Random();
 			int n = rand.nextInt(1, this.getNoeuds().size()+1);
 			return this.getNoeuds().get(n-1);
+			//faire proba en fonction de stats et outils (ex : pour combat si physique = 80 alors 0,8 de chance de reussir, plus 0,1 par outil adapté
 		}
 }

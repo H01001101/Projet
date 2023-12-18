@@ -25,6 +25,9 @@ public class DecisionNode extends InnerNode {
 		
 		public Node chooseNext() {
 			int n = this.getNoeuds().size();
+			if(n==1) {
+				return this.getNoeuds().get(n-1);
+			}
 			System.out.println("Voici les différents choix :");
 			for(int i = 0; i<this.getNoeuds().size(); i++) {
 				System.out.println(this.getNoeuds().get(i).getDescription());
