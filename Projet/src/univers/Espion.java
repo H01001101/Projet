@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import representation.*;
 
 public class Espion extends personnage_de_base {
-<<<<<<< HEAD
 		
 		public Espion() {
 			super();
@@ -21,26 +20,4 @@ public class Espion extends personnage_de_base {
 		public boolean equals(Object o) {
 			return super.equals(o);
 		}
-=======
-
-    public Espion() {
-        super();
-    }
-
-    public Espion(ArrayList<String> outils,
-                  int statsCombat, int statsNegociation, int statsFuite) {
-        super(outils, statsCombat, statsNegociation, statsFuite);
-    }
-
-    @Override
-    public String toString() {
-        return "Le personnage est un espion.\n" + super.toString();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        return super.equals(o);
-    }
-
->>>>>>> branch 'master' of https://github.com/H01001101/Projet.git
 }
