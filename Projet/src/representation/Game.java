@@ -1,6 +1,6 @@
 package representation;
 
-import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Game {
 		
@@ -22,11 +22,27 @@ public class Game {
 		
 		public void play() {
 			while(!gagne && !perds) {
-				currentNode.display();
-				currentNode = currentNode.chooseNext();
+				//actualise le chemin parcouru
+				ArrayList<Node> t = Main.perso.getChemin();
+				t.add(currentNode);
+				Main.perso.setChemin(t);
+				
+				//test si le joueur a le choix ou pas du noeuds suivant
+				if(currentNode instanceof InnerNode) {
+					InnerNode i = (InnerNode) currentNode;
+					if(i.getNoeuds().size()!=1) {
+						currentNode.display();
+					}
+				}
+				
+				//test si fin
 				if(currentNode instanceof TerminalNode) {
+					currentNode.display();
 					FinDuJeu((TerminalNode) currentNode);
 				}
+				
+				//suite du jeu
+				currentNode = currentNode.chooseNext();
 			}
 		}
 		

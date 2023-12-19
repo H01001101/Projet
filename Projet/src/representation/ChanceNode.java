@@ -3,7 +3,7 @@ package representation;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class ChanceNode extends InnerNode {
+public class ChanceNode extends InnerNode implements Combat, Fuite, Negociation {
 
 		public ChanceNode() {
 			super();
@@ -24,9 +24,47 @@ public class ChanceNode extends InnerNode {
 		}
 		
 		public Node chooseNext() {
+			if(this.equals(Main.combat1_1) || this.equals(Main.combat1_2) || this.equals(Main.combat1_3) || this.equals(Main.combat1_4) || this.equals(Main.combat2_1) || this.equals(Main.combat2_2) || this.equals(Main.combat2_3) || this.equals(Main.combat2_4) || this.equals(Main.combat3_1)) {
+				return this.combat();
+			}
+			if(this.equals(Main.fuite1_1) || this.equals(Main.fuite1_2) || this.equals(Main.fuite1_3) || this.equals(Main.fuite1_4) || this.equals(Main.fuite2_1) || this.equals(Main.fuite2_2) || this.equals(Main.fuite2_3) || this.equals(Main.fuite2_4) || this.equals(Main.fuite3_1)) {
+				return this.fuite();
+			}
+			else {
+				return this.negociation();
+			}
+		}
+		
+		public Node combat() {
 			Random rand = new Random();
-			int n = rand.nextInt(1, this.getNoeuds().size()+1);
-			return this.getNoeuds().get(n-1);
-			//faire proba en fonction de stats et outils (ex : pour combat si physique = 80 alors 0,8 de chance de reussir, plus 0,1 par outil adapté
+			int n = rand.nextInt(1,101);
+			if(Main.perso.getStatsCombat()>n) {
+				return this.getNoeuds().get(1);
+			}
+			else {
+				return this.getNoeuds().get(0);
+			}
+		}
+		
+		public Node fuite() {
+			Random rand = new Random();
+			int n = rand.nextInt(1,101);
+			if(Main.perso.getStatsFuite()>n) {
+				return this.getNoeuds().get(1);
+			}
+			else {
+				return this.getNoeuds().get(0);
+			}
+		}
+		
+		public Node negociation() {
+			Random rand = new Random();
+			int n = rand.nextInt(1,101);
+			if(Main.perso.getStatsNegociation()>n) {
+				return this.getNoeuds().get(1);
+			}
+			else {
+				return this.getNoeuds().get(0);
+			}
 		}
 }

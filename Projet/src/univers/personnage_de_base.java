@@ -1,71 +1,87 @@
 package univers;
 
 import java.util.ArrayList;
+import java.util.Objects;
+import representation.*;
 
 public class personnage_de_base {
-		
-		private int intelligence;
-		private int physique;
-		private int contacts;
-		private ArrayList<String> outils;
-	
-		public personnage_de_base() {
-			this.intelligence = 0;
-			this.physique = 0;
-			this.contacts = 0;
-			this.outils = null;
-		}
-		
-		public personnage_de_base(int a, int b, int c, ArrayList<String> d) {
-			this.intelligence = a;
-			this.physique = b;
-			this.contacts = c;
-			this.outils = d;
-		}
 
-		public int getIntelligence() {
-			return intelligence;
-		}
+    private ArrayList<Outils> outils;
+    private int statsCombat;
+    private int statsNegociation;
+    private int statsFuite;
+    private ArrayList<Node> chemin;
 
-		public void setIntelligence(int intelligence) {
-			this.intelligence = intelligence;
-		}
+    // Constructeur par défaut
+    public personnage_de_base() {
+    	this.statsCombat = 0;
+    	this.statsNegociation = 0;
+    	this.statsFuite = 0;
+        this.outils=null;
+        this.chemin = null;
+    }
 
-		public int getPhysique() {
-			return physique;
-		}
+    // Constructeur avec statistiques spécifiques
+    public personnage_de_base(int statsCombat, int statsNegociation, int statsFuite, ArrayList<Outils> d, ArrayList<Node> c) {
+        this.statsCombat = statsCombat;
+        this.statsNegociation = statsNegociation;
+        this.statsFuite = statsFuite;
+        this.outils = d;
+        this.chemin = c;
+    }
 
-		public void setPhysique(int physique) {
-			this.physique = physique;
-		}
+ 
+    // Getters et setters
+    public int getStatsCombat() {
+        return statsCombat;
+    }
 
-		public int getContacts() {
-			return contacts;
-		}
+    public void setStatsCombat(int statsCombat) {
+        this.statsCombat = statsCombat;
+    }
 
-		public void setContacts(int contacts) {
-			this.contacts = contacts;
-		}
+    public int getStatsNegociation() {
+        return statsNegociation;
+    }
 
-		public ArrayList<String> getOutils() {
-			return outils;
-		}
+    public void setStatsNegociation(int statsNegociation) {
+        this.statsNegociation = statsNegociation;
+    }
 
-		public void setOutils(ArrayList<String> outils) {
-			this.outils = outils;
-		}
-		
-		public String toString() {
-			return ("Les caractéristiques du personnage sont : \nintelligence : "+this.intelligence+"\nphysique : "+this.physique+"\ncontacts : "+this.contacts);
-		}
-		
-		public boolean equals(Object o) {
-			if(o instanceof personnage_de_base) {
-				personnage_de_base pdb = (personnage_de_base) o;
-				if(pdb.intelligence==this.intelligence && pdb.physique==this.physique && pdb.contacts==this.contacts && pdb.outils==this.outils) {
-					return true;
-				}
-			}
-			return false;
-		}
+    public int getStatsFuite() {
+        return statsFuite;
+    }
+
+    public void setStatsFuite(int statsFuite) {
+        this.statsFuite = statsFuite;
+    }
+
+    public ArrayList<Outils> getOutils() {
+        return outils;
+    }
+
+    public void setOutils(ArrayList<Outils> outils) {
+        this.outils = outils;
+    }
+    
+    public void setChemin(ArrayList<Node> chemin) {
+    	this.chemin = chemin;
+    }
+    
+    public ArrayList<Node> getChemin() {
+    	return chemin;
+    }
+
+    @Override
+    public String toString() {
+        return "Personnage : " + "\nStatistiques de combat : " + statsCombat + ", Négociation : " + statsNegociation + ", Fuite : " + statsFuite;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof personnage_de_base)) return false;
+        personnage_de_base that = (personnage_de_base) o;
+        return statsCombat == that.statsCombat && statsNegociation == that.statsNegociation && statsFuite == that.statsFuite && Objects.equals(outils, that.outils);
+    }
 }

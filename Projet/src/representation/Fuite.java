@@ -1,5 +1,5 @@
 package representation;
 
-public class Fuite extends ChanceNode {
-
+public interface Fuite {
+	Node fuite();
 }

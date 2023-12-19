@@ -1,6 +1,7 @@
 package univers;
 
 import java.util.ArrayList;
+import representation.*;
 
 public class Enqueteur extends personnage_de_base {
 
@@ -8,8 +9,8 @@ public class Enqueteur extends personnage_de_base {
 			super();
 		}
 		
-		public Enqueteur(int a, int b, int c, ArrayList<String> d) {
-			super(a,b,c,d);
+		public Enqueteur(int a, int b, int c, ArrayList<Outils> d, ArrayList<Node> e) {
+			super(a,b,c,d,e);
 		}
 		
 		public String toString() {

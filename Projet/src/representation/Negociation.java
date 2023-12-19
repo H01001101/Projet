@@ -1,5 +1,5 @@
 package representation;
 
-public class Negociation extends DecisionNode {
-
+public interface Negociation {
+	Node negociation();
 }
