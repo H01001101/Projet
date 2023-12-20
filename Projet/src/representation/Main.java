@@ -2,27 +2,31 @@ package representation;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import univers.*;
+
+/**
+ * Cette classe permet de stocker toute l'histoire du jeu et de lancer la partie
+ */
 
 public class Main {
 		
-		//creer les personnages de maniere à y avoir acces dans les autres classes pour en modifier les attributs
-		static personnage_de_base perso = new personnage_de_base();
-		static Espion perso1 = new Espion(80,40,60,null,null);
-		static Journaliste perso2 = new Journaliste(40,80,60,null,null);
-		static Enqueteur perso3 = new Enqueteur(60,40,80,null,null);
+		//crée les personnages de maniere à y avoir acces dans les autres classes pour en modifier les attributs
+		public static personnage_de_base perso = new personnage_de_base();
+		public static Espion perso1 = new Espion(80,20,50,new ArrayList<Outils>(),null);
+		public static Journaliste perso2 = new Journaliste(20,80,50,new ArrayList<Outils>(),null);
+		public static Enqueteur perso3 = new Enqueteur(50,20,80,new ArrayList<Outils>(),null);
 
 		
-		//créer tous les nodes
+		//crée tous les nodes de la même manière que les personnages
 		static DecisionNode debut = new DecisionNode("Quel personnage veux-tu incarner ? Note bien que selon ton personnage, tes chances de réussite lors de certains évènements ne seront pas les mêmes.",null);
 			
 		static DecisionNode espion = new DecisionNode("Espion",null);
 		static DecisionNode journaliste = new DecisionNode("Journaliste",null);
 		static DecisionNode enqueteur = new DecisionNode("Enquêteur",null);
 			
-		//Espion
 		static DecisionNode choixville1 = new DecisionNode("Tu as reçu un ordre de mission de ton organisation, tu vas devoir déjouer un attentat nucléaire qu'un groupe terroriste est en train de préparer, avec les informations que tu as tu as le choix entre trois villes pour commencer ta mission :",null);
+		static DecisionNode choixvilleJ = new DecisionNode("Tu découvres une information sensible pendant des recherches pour un article, cette information concerne un potentiel attentat de grande envergure et tu décides de creuser le sujet, avec l'information que tu as tu as le choix entre trois villes pour commencer tes recherches :",null);
+		static DecisionNode choixvilleE = new DecisionNode("Tu reçois une information de l'une de tes sources concernant un attentat de grande envergure qui est en train de se préparer, tu décides de te renseigner plus amplement, avec les informations que tu as tu as le choix entre trois villes pour commencer ton enquête :",null);
 			
 		static DecisionNode ville1_1 = new DecisionNode("Paris",null);
 		static DecisionNode ville1_2 = new DecisionNode("New York",null);
@@ -39,20 +43,20 @@ public class Main {
 			
 		static TerminalNode fin1_1 = new TerminalNode("C'était un piège tendu par le groupe terroriste, on n'entendra plus jamais parler de toi");
 			
-		static DecisionNode choixenquete1_1 = new DecisionNode("Maintenant que tu es installé dans ton entrepôt, comment veux tu commencer ta mission ?",null);
-		static DecisionNode choixenquete1_2 = new DecisionNode("Maintenant que tu es installé dans ta suite, comment veux tu commencer ta mission ?",null);
-		static DecisionNode choixenquete1_3 = new DecisionNode("Maintenant que tu es installé dans ton appartement, comment veux tu commencer ta mission ?",null);
+		static DecisionNode choixenquete1_1 = new DecisionNode("Maintenant que tu es installé dans ton entrepôt, comment veux tu commencer à recueillir des informations ?",null);
+		static DecisionNode choixenquete1_2 = new DecisionNode("Maintenant que tu es installé dans ta suite, comment veux tu commencer à recueillir des informations ?",null);
+		static DecisionNode choixenquete1_3 = new DecisionNode("Maintenant que tu es installé dans ton appartement, comment veux tu commencer à recueillir des informations ?",null);
 		
 		static DecisionNode enquete1_1 = new DecisionNode("En infiltrant les milieux criminels locaux",null);
 		static DecisionNode enquete1_2 = new DecisionNode("En hackant des bases de données gouvernementales",null);
 		static DecisionNode enquete1_3 = new DecisionNode("En interrogeant des sources fiables",null);
 		static DecisionNode enquete1_4 = new DecisionNode("En suivant des membres suspects du groupe terroriste",null);
 			
-		static TerminalNode fin1_2 = new TerminalNode("le matériel que tu as utilisé dans l'entrepôt n'était pas sécurisé, tu t'es fait arrêter");
-		static TerminalNode fin1_3 = new TerminalNode("La source que tu as voulu interroger est recherchée, quand tu l'as accueilli à l'hotel elle était suivie, vous etes tombés tous les deux");
+		static TerminalNode fin1_2 = new TerminalNode("Le matériel que tu as utilisé dans l'entrepôt n'était pas sécurisé, tu t'es fait arrêter");
+		static TerminalNode fin1_3 = new TerminalNode("La source que tu as voulu interroger est recherchée, quand tu l'as accueilli à l'hôtel elle était suivie, vous êtes tombés tous les deux");
 		static TerminalNode fin1_4 = new TerminalNode("Les membres que tu as suivi t'ont ensuite suivi jusqu'à ton appart sans que tu t'en rendes compte, tu es mort");
 			
-		static DecisionNode choixconfrontation1_1 = new DecisionNode("Le groupe que tu infiltres commence à avoir des soupçons",null);
+		static DecisionNode choixconfrontation1_1 = new DecisionNode("Le groupe que tu infiltres commence à avoir des soupçons, que comptes tu faire ?",null);
 		static DecisionNode choixconfrontation1_2 = new DecisionNode("Tu as fait une erreur en hackant une base de donnée, des inspecteurs sont à ta porte, que comptes tu faire ?",null);
 		static DecisionNode choixconfrontation1_3 = new DecisionNode("Ta source fiable était surveillée, tu es maintenant entouré d'agent d'une organisation inconnue, que comptes tu faire ?",null);
 		static DecisionNode choixconfrontation1_4 = new DecisionNode("Les terroristes que tu suivais s'en sont rendu compte, que comptes tu faire ?",null);
@@ -63,31 +67,31 @@ public class Main {
 		
 		static ChanceNode combat1_1 = new ChanceNode("Tu penses que ta meilleur issue est de les combattre",null);
 		static ChanceNode combat1_2 = new ChanceNode("Tu choisis de les mettre hors d'état de nuire car ils ne t'inspirent pas confiance",null);
-		static ChanceNode combat1_3 = new ChanceNode("Tu décides de les combattre avec ta source",null);
+		static ChanceNode combat1_3 = new ChanceNode("Ils ne t'inspirent pas confiance, tu décides de les combattre avec ta source",null);
 		static ChanceNode combat1_4 = new ChanceNode("Tu décides de les éliminer",null);
 			
 		static TerminalNode fin1_5 = new TerminalNode("Tu t'es fait tuer pendant le combat");
 			
 		static ChanceNode fuite1_1 = new ChanceNode("Tu penses que ta meilleur issue est de fuir",null);
-		static ChanceNode fuite1_2 = new ChanceNode("Tu décides de fuir car tu ne leur fais pas confiance, mais tu veux éviter les problèmes au maximum",null);
+		static ChanceNode fuite1_2 = new ChanceNode("Tu décides de fuir car tu ne leur fais pas confiance et tu veux éviter les problèmes",null);
 		static ChanceNode fuite1_3 = new ChanceNode("Tu décides d'aider ta source à fuir",null);
 		static ChanceNode fuite1_4 = new ChanceNode("Tu décides de fuir",null);
 			
-		static TerminalNode fin1_6 = new TerminalNode("Tu t'es fait attraper en fuyant");
+		static TerminalNode fin1_6 = new TerminalNode("Tu t'es fait attraper en fuyant, ton aventure prend fin");
 			
 		static DecisionNode nego1_1 = new DecisionNode("Tu penses que ta meilleur issue est d'essayer de parler avec eux",null);
 		static DecisionNode nego1_2 = new DecisionNode("Tu essayes de parler avec eux pour t'en sortir sans problèmes",null);
-		static DecisionNode nego1_3 = new DecisionNode("Tu essayes de parlementer pour t'en soritr avec ta source",null);
+		static DecisionNode nego1_3 = new DecisionNode("Tu essayes de parlementer pour t'en sortir avec ta source",null);
 		static DecisionNode nego1_4 = new DecisionNode("Tu essayes de négocier avec eux",null);
 		static ChanceNode arg1_1 = new ChanceNode("Tu essayes de leur faire croire que tu es de leur côté",null);
 		static ChanceNode arg1_2 = new ChanceNode("Tu essayes de les rallier à ta cause",null);
 		static ChanceNode arg1_3 = new ChanceNode("Tu fais l'ignorant",null);
 			
-		static TerminalNode fin1_7 = new TerminalNode("Tu n'as pas réussi à négocier, tu t'es fait arrêter");
+		static TerminalNode fin1_7 = new TerminalNode("Tu n'as pas réussi à négocier, ils se sont occupés de ton cas");
 			
-		static DecisionNode choixville2 = new DecisionNode("Tu as réussi ton combat, quelle prochaine ville ?",null);
-		static DecisionNode choixville3 = new DecisionNode("Tu as réussi ta fuite, quelle prochaine ville ?",null);
-		static DecisionNode choixville4 = new DecisionNode("Tu as réussi ta négociation, quelle prochaine ville ?",null);
+		static DecisionNode choixville2 = new DecisionNode("Tu as réussi ton combat, dans quelle ville vas tu te rendre à présent ?",null);
+		static DecisionNode choixville3 = new DecisionNode("Tu as réussi ta fuite, dans quelle ville vas tu te rendre à présent ?",null);
+		static DecisionNode choixville4 = new DecisionNode("Tu as réussi ta négociation, dans quelle ville vas tu te rendre à présent ?",null);
 			
 		static DecisionNode ville2_1 = new DecisionNode("Paris",null);
 		static DecisionNode ville2_2 = new DecisionNode("New York",null);
@@ -104,9 +108,9 @@ public class Main {
 			
 		static TerminalNode fin1_8 = new TerminalNode("Tu t'es fait tué lors d'une rixe en arrivant");
 			
-		static DecisionNode choixenquete2_1 = new DecisionNode("Maintenant que tu es installé dans ton hotel, comment veux tu commencer ta mission ?",null);
-		static DecisionNode choixenquete2_2 = new DecisionNode("Maintenant que tu es installé dans ton appart, comment veux tu commencer ta mission ?",null);
-		static DecisionNode choixenquete2_3 = new DecisionNode("Maintenant que tu es installé dans ton lieu mystérieux, qui s'est avérer être ..., comment veux tu commencer ta mission ?",null);
+		static DecisionNode choixenquete2_1 = new DecisionNode("Maintenant que tu es installé dans ton hotel, comment veux tu continuer ton enquête ?",null);
+		static DecisionNode choixenquete2_2 = new DecisionNode("Maintenant que tu es installé dans ton appart, comment veux tu continuer ton enquête ?",null);
+		static DecisionNode choixenquete2_3 = new DecisionNode("Maintenant que tu es installé dans ton lieu mystérieux, qui s'est avéré être une planque d'un haut placé d'un gouvernement qui veut t'aider, comment veux tu continuer ton enquête ?",null);
 			
 		static DecisionNode enquete2_1 = new DecisionNode("Infiltrer les milieux politiques locaux",null);
 		static DecisionNode enquete2_2 = new DecisionNode("Décrypter des communications codées du groupe terroriste",null);
@@ -154,9 +158,9 @@ public class Main {
 		static DecisionNode choixville6 = new DecisionNode("Tu as réussi ta fuite, tu sais maintenant où te rendre pour déjour l'attentat",null);
 		static DecisionNode choixville7 = new DecisionNode("Tu as réussi ta négociation, tu sais maintenant où te rendre pour déjour l'attentat",null);
 			
-		static DecisionNode choixconfrontation3_1 = new DecisionNode("En arrivant à Paris, tu te rends sur le lieux où aura lieu l'attentat grâce aux informations que tu as récolter, que comptes tu faire sur place ?",null);
-		static DecisionNode choixconfrontation3_2 = new DecisionNode("En arrivant à New York, tu te rends sur le lieux où aura lieu l'attentat grâce aux informations que tu as récolter, que comptes tu faire sur place ?",null);
-		static DecisionNode choixconfrontation3_3 = new DecisionNode("En arrivant à Hong Kong, tu te rends sur le lieux où aura lieu l'attentat grâce aux informations que tu as récolter, que comptes tu faire sur place ?",null);
+		static DecisionNode choixconfrontation3_1 = new DecisionNode("En arrivant à Paris, tu te rends sur le lieux où aura lieu l'attentat grâce aux informations que tu as récolté, que comptes tu faire sur place ?",null);
+		static DecisionNode choixconfrontation3_2 = new DecisionNode("En arrivant à New York, tu te rends sur le lieux où aura lieu l'attentat grâce aux informations que tu as récolté, que comptes tu faire sur place ?",null);
+		static DecisionNode choixconfrontation3_3 = new DecisionNode("En arrivant à Hong Kong, tu te rends sur le lieux où aura lieu l'attentat grâce aux informations que tu as récolté, que comptes tu faire sur place ?",null);
 			
 		static DecisionNode confrontation3_1 = new DecisionNode("Combattre",null);
 		static DecisionNode confrontation3_2 = new DecisionNode("Fuir",null);
@@ -177,13 +181,13 @@ public class Main {
 			
 		static TerminalNode echec = new TerminalNode("C'est un échec, l'attentat a eu lieu et on te fait porter le chapeau, tu passeras donc la fin de tes jours en prison");
 			
-			
-			//Journaliste
-			
-			//Enqueteur
+		/**
+		 * Lie tous les noeuds entre eux
+		 * Lance la partie
+		 */
 		public static void main(String[] args) {
 			
-			//Ajouter tous les nodes nextNode
+			//Ajouter tous les successeurs de chaque node
 			ArrayList<Node> nextdebut = new ArrayList<Node>();
 			nextdebut.add(espion);
 			nextdebut.add(journaliste);
@@ -195,11 +199,11 @@ public class Main {
 			espion.setNoeuds(nextespion);
 			
 			ArrayList<Node> nextjournaliste = new ArrayList<Node>();
-			nextjournaliste.add(null);
+			nextjournaliste.add(choixvilleJ);
 			journaliste.setNoeuds(nextjournaliste);
 			
 			ArrayList<Node> nextenqueteur = new ArrayList<Node>();
-			nextenqueteur.add(null);
+			nextenqueteur.add(choixvilleE);
 			enqueteur.setNoeuds(nextenqueteur);
 			
 			ArrayList<Node> nextchoixville1 = new ArrayList<Node>();
@@ -207,6 +211,18 @@ public class Main {
 			nextchoixville1.add(ville1_2);
 			nextchoixville1.add(ville1_3);
 			choixville1.setNoeuds(nextchoixville1);
+			
+			ArrayList<Node> nextchoixvilleJ = new ArrayList<Node>();
+			nextchoixvilleJ.add(ville1_1);
+			nextchoixvilleJ.add(ville1_2);
+			nextchoixvilleJ.add(ville1_3);
+			choixvilleJ.setNoeuds(nextchoixvilleJ);
+			
+			ArrayList<Node> nextchoixvilleE = new ArrayList<Node>();
+			nextchoixvilleE.add(ville1_1);
+			nextchoixvilleE.add(ville1_2);
+			nextchoixvilleE.add(ville1_3);
+			choixvilleE.setNoeuds(nextchoixvilleE);
 			
 			ArrayList<Node> nextville1_1 = new ArrayList<Node>();
 			nextville1_1.add(choixplanque1_1);
@@ -730,17 +746,22 @@ public class Main {
 			arg3_3.setNoeuds(nextarg3_3);
 			
 			
-			//lancer la partie depuis le premier node
+			//initialise la partie
 			debut.display();
 			
 			System.out.println("Voici les différents choix :");
-			System.out.println("Espion");
-			System.out.println("Journaliste");
-			System.out.println("Enquêteur");
+			System.out.println("Espion\n"+perso1.toString());
+			System.out.println("Journaliste\n"+perso2.toString());
+			System.out.println("Enquêteur\n"+perso3.toString());
 			Scanner scanner = new Scanner(System.in);
 			System.out.println("Choisis l'une des "+3+" options :");
 			int nombre = scanner.nextInt();
 			
+			//exception
+			if(nombre>3)
+				throw new IllegalArgumentException ("Tu dois choisir un chiffre entre 1 et 3");
+			
+			//lance la partie selon le choix du joueur
 			if(nombre==1) {
 				Game partieEspion = new Game(espion);
 				perso = perso1;

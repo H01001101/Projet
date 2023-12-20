@@ -1,5 +1,10 @@
 package representation;	
 
+/**
+ * Cette classe abstraite permet de représenter les noeuds de notre histoire
+ * Elle contient les méthodes permettant de construire ces objets
+ */
+
 public abstract class Node implements Event{
 		
 		private String description;
@@ -12,6 +17,11 @@ public abstract class Node implements Event{
 			nombreObjetsNode++;
 		}
 		
+		/**
+		 * Crée un noeud
+		 * 
+		 * @param description la description du noeud
+		 */
 		public Node(String description) {
 			this.description = description;
 			this.id = nombreObjetsNode;

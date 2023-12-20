@@ -8,6 +8,5 @@ public enum Lieux {
     ENTREPOT,
     SUITE,
     APPARTEMENT,
-    LIEU_INCONNU,
-    RESTAURANT
+    LIEU_INCONNU
 }

@@ -2,6 +2,11 @@ package representation;
 
 import java.util.ArrayList;
 
+/**
+ * Cette classe abstraite représente les noeuds qui peuvent mener à d'autres noeuds
+ * Elle contient les méthodes permettant de construire ces objets
+ */
+
 public abstract class InnerNode extends Node {
 		
 		private ArrayList<Node> noeuds;
@@ -11,6 +16,12 @@ public abstract class InnerNode extends Node {
 			this.noeuds = null;
 		}
 		
+		/**
+		 * Crée un InnerNode
+		 * 
+		 * @param description La description du noeud
+		 * @param noeuds La liste de ses successeurs
+		 */
 		public InnerNode(String description, ArrayList<Node> noeuds) {
 			super(description);
 			this.noeuds = noeuds;

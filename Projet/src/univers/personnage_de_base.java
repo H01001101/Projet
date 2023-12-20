@@ -1,8 +1,12 @@
 package univers;
 
 import java.util.ArrayList;
-import java.util.Objects;
 import representation.*;
+
+/**
+ * Cette classe représente un personnage
+ * Elle contient les méthodes permettant de construire ces objets
+ */
 
 public class personnage_de_base {
 
@@ -12,26 +16,31 @@ public class personnage_de_base {
     private int statsFuite;
     private ArrayList<Node> chemin;
 
-    // Constructeur par défaut
     public personnage_de_base() {
     	this.statsCombat = 0;
     	this.statsNegociation = 0;
     	this.statsFuite = 0;
-        this.outils=null;
+        this.outils=new ArrayList<Outils>();
         this.chemin = null;
     }
-
-    // Constructeur avec statistiques spécifiques
-    public personnage_de_base(int statsCombat, int statsNegociation, int statsFuite, ArrayList<Outils> d, ArrayList<Node> c) {
+    
+    /**
+     * Crée un personnage
+     * 
+     * @param statsCombat défini les compétences de combat du personnage
+     * @param statsNegociation défini les compétences de négociation du personnage
+     * @param statsFuite défini les compétences de fuite du personnage
+     * @param o défini les outils détenus par le personnage
+     * @param c défini le chemin parcouru par le personnage
+     */
+    public personnage_de_base(int statsCombat, int statsNegociation, int statsFuite, ArrayList<Outils> o, ArrayList<Node> c) {
         this.statsCombat = statsCombat;
         this.statsNegociation = statsNegociation;
         this.statsFuite = statsFuite;
-        this.outils = d;
+        this.outils = o;
         this.chemin = c;
     }
 
- 
-    // Getters et setters
     public int getStatsCombat() {
         return statsCombat;
     }
@@ -74,14 +83,17 @@ public class personnage_de_base {
 
     @Override
     public String toString() {
-        return "Personnage : " + "\nStatistiques de combat : " + statsCombat + ", Négociation : " + statsNegociation + ", Fuite : " + statsFuite;
-    }
+        return "Statistiques de combat : " + statsCombat + ", Statistiques de négociation : " + statsNegociation + ", Statistiques de fuite : " + statsFuite;
+    }    
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof personnage_de_base)) return false;
-        personnage_de_base that = (personnage_de_base) o;
-        return statsCombat == that.statsCombat && statsNegociation == that.statsNegociation && statsFuite == that.statsFuite && Objects.equals(outils, that.outils);
+        if (o instanceof personnage_de_base) {
+        	personnage_de_base p = (personnage_de_base) o;
+        	if(this.statsCombat==p.statsCombat && this.statsNegociation==p.statsNegociation && this.statsFuite==p.statsFuite && this.outils.equals(p.outils) && this.chemin.equals(p.chemin)) {
+        		return true;
+        	}
+        }
+        return false;
     }
 }

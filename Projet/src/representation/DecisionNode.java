@@ -3,12 +3,26 @@ package representation;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Cette classe représente les noeuds de décision.
+ * Décisions basées soit sur le choix du joueur
+ * soit sur le chemin qu'il a parcouru
+ * Elle contient les méthodes permettant de construire ces objets
+ * Elle contient également la méthode permettant de choisir le noeud suivant
+ */
+
 public class DecisionNode extends InnerNode {
 		
 		public DecisionNode() {
 			super();
 		}
 		
+		/**
+		 * Crée un DecisionNode
+		 * 
+		 * @param d la description du noeud
+		 * @param n la liste de ses successeurs
+		 */
 		public DecisionNode(String d, ArrayList<Node> n) {
 			super(d,n);
 		}
@@ -23,6 +37,12 @@ public class DecisionNode extends InnerNode {
 			return super.equals(o);
 		}
 		
+		/**
+		 * Choisis le noeud suivant soit en demandant au joueur soit selon le chemin parcouru par le joueur
+		 * 
+		 * @return le noeud choisi
+		 */
+		@Override
 		public Node chooseNext() {
 			int n = this.getNoeuds().size();
 			//si il n'y a qu'un noeud suivant
@@ -77,6 +97,42 @@ public class DecisionNode extends InnerNode {
 			
 			//choixville 1
 			if(this.equals(Main.choixville2) && this.getNoeuds().size()==3) {
+				if(chemin.contains(Main.ville1_1)) {
+					ArrayList<Node> villes = this.getNoeuds();
+					villes.remove(Main.ville2_1);
+					this.setNoeuds(villes);
+				}
+				if(chemin.contains(Main.ville1_2)) {
+					ArrayList<Node> villes = this.getNoeuds();
+					villes.remove(Main.ville2_2);
+					this.setNoeuds(villes);
+				}
+				if(chemin.contains(Main.ville1_3)) {
+					ArrayList<Node> villes = this.getNoeuds();
+					villes.remove(Main.ville2_3);
+					this.setNoeuds(villes);
+				}
+			}
+			
+			if(this.equals(Main.choixville3) && this.getNoeuds().size()==3) {
+				if(chemin.contains(Main.ville1_1)) {
+					ArrayList<Node> villes = this.getNoeuds();
+					villes.remove(Main.ville2_1);
+					this.setNoeuds(villes);
+				}
+				if(chemin.contains(Main.ville1_2)) {
+					ArrayList<Node> villes = this.getNoeuds();
+					villes.remove(Main.ville2_2);
+					this.setNoeuds(villes);
+				}
+				if(chemin.contains(Main.ville1_3)) {
+					ArrayList<Node> villes = this.getNoeuds();
+					villes.remove(Main.ville2_3);
+					this.setNoeuds(villes);
+				}
+			}
+			
+			if(this.equals(Main.choixville4) && this.getNoeuds().size()==3) {
 				if(chemin.contains(Main.ville1_1)) {
 					ArrayList<Node> villes = this.getNoeuds();
 					villes.remove(Main.ville2_1);
@@ -158,6 +214,48 @@ public class DecisionNode extends InnerNode {
 				}
 			}
 			
+			if(this.equals(Main.choixville6)) {
+				if(chemin.contains(Main.ville1_1) && chemin.contains(Main.ville2_2)) {
+					return this.getNoeuds().get(2);
+				}
+				if(chemin.contains(Main.ville1_1) && chemin.contains(Main.ville2_3)) {
+					return this.getNoeuds().get(1);
+				}
+				if(chemin.contains(Main.ville1_2) && chemin.contains(Main.ville2_1)) {
+					return this.getNoeuds().get(2);
+				}
+				if(chemin.contains(Main.ville1_2) && chemin.contains(Main.ville2_3)) {
+					return this.getNoeuds().get(0);
+				}
+				if(chemin.contains(Main.ville1_3) && chemin.contains(Main.ville2_1)) {
+					return this.getNoeuds().get(1);
+				}
+				if(chemin.contains(Main.ville1_3) && chemin.contains(Main.ville2_2)) {
+					return this.getNoeuds().get(0);
+				}
+			}
+			
+			if(this.equals(Main.choixville7)) {
+				if(chemin.contains(Main.ville1_1) && chemin.contains(Main.ville2_2)) {
+					return this.getNoeuds().get(2);
+				}
+				if(chemin.contains(Main.ville1_1) && chemin.contains(Main.ville2_3)) {
+					return this.getNoeuds().get(1);
+				}
+				if(chemin.contains(Main.ville1_2) && chemin.contains(Main.ville2_1)) {
+					return this.getNoeuds().get(2);
+				}
+				if(chemin.contains(Main.ville1_2) && chemin.contains(Main.ville2_3)) {
+					return this.getNoeuds().get(0);
+				}
+				if(chemin.contains(Main.ville1_3) && chemin.contains(Main.ville2_1)) {
+					return this.getNoeuds().get(1);
+				}
+				if(chemin.contains(Main.ville1_3) && chemin.contains(Main.ville2_2)) {
+					return this.getNoeuds().get(0);
+				}
+			}
+			
 			//fins de l'histoire 1
 			if(this.equals(Main.enquete1_2)) {
 				if(chemin.contains(Main.planque1_1)) {
@@ -207,6 +305,11 @@ public class DecisionNode extends InnerNode {
 			Scanner scanner = new Scanner(System.in);
 			System.out.println("Choisis l'une des "+n+" options :");
 			int nombre = scanner.nextInt();
+			
+			//exception
+			if(nombre>n)
+				throw new IllegalArgumentException ("Tu dois choisir un chiffre entre 1 et "+n);
+			
 			return this.getNoeuds().get(nombre-1);
 		}
 }
