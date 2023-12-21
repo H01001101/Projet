@@ -1,6 +1,7 @@
 package representation;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 import univers.*;
 
 /**
@@ -13,6 +14,7 @@ public class Game {
 		private Node currentNode;
 		private boolean gagne;
 		private boolean perds;
+		public static ArrayList<String> sauvegardes;
 		
 		public Game() {
 			this.currentNode = null;
@@ -35,6 +37,7 @@ public class Game {
 		 * gère le déroulement de la partie
 		 */
 		public void play() {
+			
 			while(!gagne && !perds) {
 				//actualise le chemin parcouru
 				ArrayList<Node> t = Main.perso.getChemin();
@@ -88,6 +91,25 @@ public class Game {
 					o.add(Outils.INFORMATION);
 					Main.perso.setOutils(o);
 					System.out.println("Avec ta planque tu as obtenu un allié et une information");
+				}
+				
+				//proposer une sauvegarde
+				if(currentNode.equals(Main.choixplanque1_1) || currentNode.equals(Main.choixplanque1_2) || currentNode.equals(Main.choixplanque1_3) || currentNode.equals(Main.choixplanque2_1) || currentNode.equals(Main.choixplanque2_2) || currentNode.equals(Main.choixplanque2_3)) {
+					Scanner scanner = new Scanner(System.in);
+					System.out.println("Veux tu sauvegarder ? (oui/non)");
+					String choix = scanner.nextLine();
+					switch (choix) {
+					case "oui":
+						System.out.println("Nomme ta sauvegarde :");
+						String nomS = scanner.nextLine();
+						Sauvegarde.sauvegarderPartie(nomS+".txt",currentNode);
+						sauvegardes.add(nomS);
+						break;
+					case "non":
+						break;
+					default:
+						System.out.println("Entrée invalide, écris oui ou non");
+					}
 				}
 				
 				//test si le joueur a le choix ou non du noeud suivant

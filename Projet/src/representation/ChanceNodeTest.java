@@ -1,13 +1,14 @@
 package representation;
-
+//le import org.junit ne fonctionne malgré l'ajout de la bibliothèque junit
+/*
 import univers.*;
 import org.junit.Test;
 import static org.junit.Assert.*;
-
+*/
 /**
  * Cette classe est la classe test de la classe ChanceNode
  */
-
+/*
 public class ChanceNodeTest {
 	
 	@Test
@@ -26,4 +27,4 @@ public class ChanceNodeTest {
 		assertEquals(Main.fin1_5,resultat);
 	}
 
-}
+}*/

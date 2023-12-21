@@ -2,6 +2,7 @@ package representation;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Collections;
 import univers.*;
 
 /**
@@ -746,7 +747,45 @@ public class Main {
 			arg3_3.setNoeuds(nextarg3_3);
 			
 			
-			//initialise la partie
+			//Menu
+			Menu();
+		}
+		
+		/**
+		 * Menu du jeu
+		 */
+		public static void Menu() {
+			Scanner scanner = new Scanner(System.in);
+			while(true) {
+				System.out.println("----------Menu----------");
+				System.out.println("   >Lancer la partie<   ");
+				System.out.println(">Charger une sauvegarde<");
+				System.out.println("    >Quitter le jeu<    ");
+				System.out.println("------------------------");
+				
+				int choix = scanner.nextInt();
+				scanner.nextLine();
+				
+				switch (choix) {
+				case 1:
+					lancerPartie();
+					break;
+				case 2:
+					chargerSauvegarde();
+					break;
+				case 3:
+					quitterJeu();
+					return;
+				default:
+					System.out.println("Sélection invalide. Ecris un chiffre entre 1 et 3.");
+				}
+			}
+		}
+		
+		/**
+		 * initialise une partie et la lance
+		 */
+		public static void lancerPartie() {
 			debut.display();
 			
 			System.out.println("Voici les différents choix :");
@@ -788,5 +827,58 @@ public class Main {
 				perso.setChemin(k);
 				partieEnqueteur.play();
 			}
+		}
+		
+		/**
+		 * permet au joueur de charger une sauvegarde parmis celles qui lui sont proposées
+		 * (les sauvegardes ne fonctionnent pas bien parce que le code comporte certains défauts qui n'ont pas eu le temps d'être réglés et qui font bugger les parties chargées à partir de sauvegardes)
+		 */
+		public static void chargerSauvegarde() {
+			if(Game.sauvegardes==null) {
+				System.out.println("Il n'y a aucune sauvegarde");
+			}
+			else {
+				for(String i : Game.sauvegardes) {
+					System.out.println(i);
+				}
+				Scanner scanner = new Scanner(System.in);
+				System.out.println("Ecris le nom de la sauvegarde que tu veux charger :");
+				String sauv = scanner.nextLine();
+				Node noeudCharge = Sauvegarde.chargerPartie(sauv+".txt");
+				if(noeudCharge.getDescription()==choixplanque1_1.getDescription()) {
+					Game reprendre = new Game(choixplanque1_1);
+					reprendre.play();
+				}
+				if(noeudCharge.getDescription()==choixplanque1_2.getDescription()) {
+					Game reprendre = new Game(choixplanque1_2);
+					reprendre.play();
+				}
+				if(noeudCharge.getDescription()==choixplanque1_3.getDescription()) {
+					Game reprendre = new Game(choixplanque1_3);
+					reprendre.play();
+				}
+				if(noeudCharge.getDescription()==choixplanque2_1.getDescription()) {
+					Game reprendre = new Game(choixplanque2_1);
+					reprendre.play();
+				}
+				if(noeudCharge.getDescription()==choixplanque2_2.getDescription()) {
+					Game reprendre = new Game(choixplanque2_2);
+					reprendre.play();
+				}
+				if(noeudCharge.getDescription()==choixplanque2_3.getDescription()) {
+					Game reprendre = new Game(choixplanque2_3);
+					reprendre.play();
+				}
+				Game reprendre = new Game(noeudCharge);
+				reprendre.play();
+			}
+		}
+		
+		/**
+		 * permet au joueur de quitter le jeu
+		 */
+		public static void quitterJeu() {
+			System.out.println("Merci d'avoir joué !");
+			System.exit(0);
 		}
 }

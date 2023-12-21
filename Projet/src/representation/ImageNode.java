@@ -1,5 +1,5 @@
 package representation;
-
+/*
 public class ImageNode implements Event {
 		@Override
 		public void display() {
@@ -10,4 +10,4 @@ public class ImageNode implements Event {
 		public Event chooseNext() {
 			
 		}
-}
+}*/

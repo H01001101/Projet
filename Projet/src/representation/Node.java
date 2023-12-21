@@ -1,11 +1,15 @@
 package representation;	
 
+import java.io.*;
+
 /**
  * Cette classe abstraite permet de représenter les noeuds de notre histoire
  * Elle contient les méthodes permettant de construire ces objets
  */
 
-public abstract class Node implements Event{
+public abstract class Node implements Event, Serializable {
+		
+		private static final long serialVersionUID = 1L;
 		
 		private String description;
 		static private int nombreObjetsNode = 1;
