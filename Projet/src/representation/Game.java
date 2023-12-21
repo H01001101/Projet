@@ -14,7 +14,7 @@ public class Game {
 		private Node currentNode;
 		private boolean gagne;
 		private boolean perds;
-		public static ArrayList<String> sauvegardes;
+		public static ArrayList<String> sauvegardes = new ArrayList<String>();
 		
 		public Game() {
 			this.currentNode = null;
